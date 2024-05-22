@@ -12,3 +12,5 @@ This repository is structured in 5 folders:
 - **database**: SQL scripts to populate the PostgreSQL database.
 - **web**: code of the frontend component.
 - **helm-chart**: Helm chart of the enablers.
+
+You can find the enabler's documentation in ReadTheDocs: [Devices management enabler](https://assist-iot-enablers-documentation.readthedocs.io/en/latest/verticals/manageability/devices_management_enabler.html) and [Enablers management enabler](https://assist-iot-enablers-documentation.readthedocs.io/en/latest/verticals/manageability/registration_and_status_enabler.html)
