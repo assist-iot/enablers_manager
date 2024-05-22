@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  manageability-enabler:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-05-22T10:23:35.277734439+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 605c434b80f6592c6edd8795a3e085ae880fc12ddd2d5ba26722c7b2852b466d
+    name: manageability-enabler
+    type: application
+    urls:
+    - manageability-enabler-0.2.0.tgz
+    version: 0.2.0
+generated: "2024-05-22T10:23:35.276165826+02:00"

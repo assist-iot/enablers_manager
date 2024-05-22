@@ -1,0 +1,59 @@
+server {
+    listen 80;
+    server_name ~^(.+)$;
+    root /usr/share/nginx/html;
+    client_max_body_size 100M;
+
+    location ~* \.(eot|ttf|otf|woff|woff2)$ {
+        add_header Access-Control-Allow-Origin *;
+    }
+
+    location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+        expires 168h;
+        add_header Pragma public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
+
+    location / {
+        try_files $uri $uri/ /assistiot/index.html;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Server $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location = / {
+        rewrite "^.*$" /assistiot/index.html break;
+    }
+
+    location /dashboard/ {
+        proxy_pass http://${DASHBOARD_HOST_NAME}:${DASHBOARD_HOST_PORT}/dashboard/;
+
+        set $enable_login_rewrite ${ENABLE_AUTH_IDM}; 
+
+        if ($enable_login_rewrite = "true") {
+            rewrite ^/dashboard/login/signin /dashboard/loginAutzIdm/signin break;
+        }
+    }
+
+    location /pilot {
+    	rewrite ^/pilot/(.*) /$1 break;
+        proxy_pass http://${PILOT_HOST}:${PILOT_PORT};
+    }
+
+    location ^~ /kibana {
+        rewrite ^/kibana(/.*)$ $1 break;
+        proxy_pass http://${KIBANA_HOST_NAME}:${KIBANA_HOST_PORT}/app/home;
+        proxy_http_version 1.1;
+    }
+
+    location ^~ /authzserver {
+        proxy_pass http://${AUTHZSERVER_HOST_NAME}:${AUTHZSERVER_HOST_PORT}/authzserver;
+        proxy_http_version 1.1;
+    }
+
+    location ^~ /grafana {
+        rewrite  ^/grafana/(.*)  /$1 break;
+        proxy_pass http://${GRAFANA_HOST_NAME}:${GRAFANA_HOST_PORT};
+        proxy_http_version 1.1;
+    }
+}

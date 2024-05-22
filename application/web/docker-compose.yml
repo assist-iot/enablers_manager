@@ -1,0 +1,36 @@
+
+services:
+    dashboard-client:
+      image: node:12.22.1
+      ports:
+        - 8081:8081
+      working_dir: /src
+      volumes:
+        - ".:/src"
+      environment:
+        HOST: 0.0.0.0
+        DASHBOARD_HOST: dashboard
+      command: bash -c "npm install && npm run serve"
+      # command: bash -c "npm install --legacy-peer-deps && npm run serve"
+      depends_on:
+        - dashboard
+
+    dashboard:
+      image: gitlab.assist-iot.eu:5050/wp4/applications/dashboard-pui9/dashboard
+      restart: always
+      ports:
+        - 8080:8080
+      depends_on:
+        - postgres
+
+    postgres:
+      image: postgres:14.5-alpine
+      restart: always
+      environment:
+        POSTGRES_USER: dashboard
+        POSTGRES_DB: dashboard-pui9
+        POSTGRES_PASSWORD: docker
+      ports:
+        - 5432:5432
+      volumes:
+        - ../postgres/db.sql:/docker-entrypoint-initdb.d/db.sql

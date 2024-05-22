@@ -1,0 +1,195 @@
+/* imagen pantalla login en desktop */
+
+.pui-login__image--desktop {
+	background-image: url('./../assets/login_hd.jpg') !important;
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+	width: 100%;
+}
+
+
+/* imagen pantalla login en móvil */
+/*
+@media (max-width: 1100px) {
+	.pui-login__image--desktop {
+		background-image: url('./../assets/login.png') !important;
+	}
+}
+*/
+
+
+/* logo aplicación en el menú */
+
+.puimenu-leftBar__logo-img {
+	background-image: url('./../assets/app_logo_mini.png') !important;
+	background-size: cover;
+	background-position: center;
+}
+
+.puimenu-leftBar__item__title:hover {
+	background-color: rgba(0, 0, 0, 0.2) !important;
+
+}
+
+/* logo aplicación en el home */
+/*
+.puiwellcomepanel__logo-img {
+	background: url('./../assets/app_logo.png') no-repeat center;
+*/
+
+
+/* Custom styles Assist-iot  */
+
+:root {
+	--primarycolor: #545454;
+	--secondarycolor: rgb(99, 102, 241);
+	--inputfocuscolor: #6366f1;
+	--main-200: #9C4467;
+	--main-150: #AA4B71;
+	--main-85: #d8d9fb;
+	--main-25: #6366f1;
+	--main-10: #F9F1F4;
+}
+
+
+.login__logo {
+	background: url('./../assets/app_logo.webp') no-repeat center;
+	background-size: contain;
+	height: 55px;
+}
+
+.pui-login-display-area__margin {
+	height: 0;
+}
+
+.pui-login__display-area > div{
+	max-width: 100% !important;
+	margin: 0 !important;
+	height: 100%;
+}
+
+.puimenu-leftBar__btn.disabled:hover {
+	cursor: default !important;
+}
+
+.puimenu-leftBar__btn.disabled:hover .v-icon.error--text {
+	color: var(--v-error-base) !important;
+}
+.puimenu-leftBar__item,
+.puimenu-leftBar__title {
+    height: 40px;
+    margin: 8px;
+    cursor: pointer;
+
+    .v-icon {
+        width: 48px !important;
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    &:hover {
+        transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1), visibility 0s;
+        background-color: #6366f1 !important;
+        border-radius: 5px;
+
+        .v-icon {
+            color: var(--blanco) !important;
+        }
+    }
+
+    &--active {
+        .v-icon {
+            background-color: #6366f1 !important;
+            color: var(--blanco) !important;
+            width: 48px !important;
+        }
+
+        &:hover {
+            background-color:#6366f1 !important;
+        }
+    }
+
+    &.disabled {
+        &:hover {
+            background-color: var(--primarycolor) !important;
+
+            .v-icon {
+                color: var(--secondarycolor) !important;
+            }
+
+            .puimenu-leftBar__title {
+                color: var(--blanco) !important;
+            }
+        }
+    }
+
+    &--last {
+        position: absolute;
+        bottom: 8px;
+    }
+
+    &--floating {
+        position: fixed;
+        z-index: 102;
+        background-color: var(--primarycolor);
+    }
+
+    &--nofixed {
+        position: absolute !important;
+        right: 0px;
+
+        .v-btn {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+    }
+
+    &--semi-transparent {
+        opacity: 0.5;
+    }
+}
+
+.treeElement {
+	border-radius: 5px !important;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 0.9rem;
+	padding: 5px;
+}
+
+.treeElement .treeElementHeader {
+	border-radius: 5px !important;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 6px;
+}
+
+.treeElement .treeElementHeader:hover {
+	background-color: rgba(255, 255, 255, 0.185) !important;
+	cursor: pointer;
+}
+
+.treeElement.treeElementLevelThree .treeElementHeader {
+	margin-left: -10px;
+	padding-left: 20px;
+	margin-right: -10px;
+}
+
+.treeElement .treeParent {
+	font-weight: 600;
+}
+
+.treeElement .arrowNewLevel {
+	color: var(--N-0) !important;
+	font-size: 16px !important;
+	padding-top: 1px;
+}
+
+.pui-container{
+    background-color: #fefefe !important;
+}
+
+.pui-container__header{
+    background-color: #fefefe !important;
+}

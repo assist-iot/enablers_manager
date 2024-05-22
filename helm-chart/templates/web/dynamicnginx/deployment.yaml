@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "webdynamic.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "webdynamic.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.webdynamic.autoscaling.enabled }}
+  replicas: {{ .Values.webdynamic.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "webdynamic.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "webdynamic.labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.webdynamic.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.enablerNodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if not .Values.enablerNodeSelector }}
+        {{- with .Values.webdynamic.nodeSelector }}
+      nodeSelector:
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
+      {{- with .Values.webdynamic.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.webdynamic.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.webdynamic.podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+        - name: webdynamic
+          securityContext:
+            {{- toYaml .Values.webdynamic.securityContext | nindent 12 }}
+          image: "{{ .Values.webdynamic.image.repository }}:{{ .Values.webdynamic.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.webdynamic.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.webdynamic.resources | nindent 12 }}
+          env:
+            - name: CONFIGMAP_NAME
+              value: {{ include "web.fullname" . }}-configmap
+

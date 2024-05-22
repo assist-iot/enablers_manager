@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "web.fullname" . }}-configmap
+data:
+  default.conf : |
+    server {
+        listen   8080;
+        server_name ~^(.+)$;
+        root /usr/share/nginx/html;
+        client_max_body_size 100M;
+        resolver kube-dns.kube-system.svc.cluster.local;
+
+        error_log  /var/log/nginx/error.log info;
+        access_log  /var/log/nginx/access.log;
+        
+        proxy_read_timeout 20;
+        proxy_connect_timeout 20;
+        proxy_send_timeout 20; 
+        
+        # Disabling cache so the browser won't cache the website
+        expires           0;
+        add_header        Cache-Control private;
+
+        location ~* \.(eot|ttf|otf|woff|woff2)$ {
+            add_header Access-Control-Allow-Origin *;
+        }
+
+        location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
+            expires 168h;
+            add_header Pragma public;
+            add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+        }
+
+        location / {
+            try_files $uri $uri/ /assistiot/index.html;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Server $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+        location = / {
+            rewrite "^.*$" /assistiot/index.html break;
+        }
+
+        location /dashboard/ {
+            proxy_pass http://{{ include "api.fullname" . }}:{{ .Values.api.service.ports.port1.containerPort }}/dashboard/;
+
+            set $enable_login_rewrite true; 
+
+            if ($enable_login_rewrite = "true") {
+                rewrite ^/dashboard/login/signin /dashboard/loginAutzIdm/signin break;
+            }
+        }
+
+        location /pilot {
+          rewrite ^/pilot/(.*) /$1 break;
+            proxy_pass http://{{ .Values.web.envVars.PILOT_HOST }}:{{ .Values.web.envVars.PILOT_PORT }};
+        }
+        
+        location ^~ /authzserver {
+            proxy_pass http://{{ .Values.web.envVars.AUTHZSERVER_HOST_NAME }}:{{ .Values.web.envVars.AUTHZSERVER_HOST_PORT }}/authzserver;
+            proxy_set_header Host $host:83;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location ^~ /konga {
+          rewrite ^/konga/(.*) /$1 break;
+          proxy_pass http://{{ .Values.web.envVars.KONGA_HOST_NAME }}:{{ .Values.web.envVars.KONGA_HOST_PORT }}/;
+          proxy_http_version 1.1;
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+            root /usr/share/nginx/html;
+        }
+    }

@@ -1,0 +1,337 @@
+{
+	"menu.device": "Device",
+	"menu.enablers": "Enablers",
+	"menu.helmrepository": "Helm Repositories",
+	"menu.clustersdevices": "K8s Clusters and Devices",
+	"menu.k8scluster": "K8s Clusters",
+	"menu.clustertopology": "K8s Cluster Topology",
+	"menu.groupofcars": "Vehicle Group",
+	"menu.cars": "Vehicles",
+	"menu.enabler": "Enabler List",
+	"menu.pilot3a": "Pilot 3a",
+	"menu.plugins": "Plugins",
+	"menu.pilot3b": "Pilot 3b", 
+	"menu.pilot3bclouddash": "Cloud dashboard",
+	"menu.pilot3bedgedash": "Edge dashboard",
+	"menu.pilot3bfl": "FL dashboard",
+	"form.device": "Device Form",
+	"puiaction.disabledevice": "Disable Device",
+	"grid.device.id": "ID",
+	"grid.device.name": "Name",
+	"grid.device.description": "Description",
+	"k8scluster": {
+		"noData": "No clusters available",
+		"new": "Add a new cluster",
+		"delete": "Delete a cluster",
+		"deleteConfirmation": "Do you want to delete the cluster",
+		"table": {
+			"k8sversion": "K8s Version",
+			"server": "Server"
+		},
+		"form": {
+			"cniHint": "CNI must be flannel or cilium",
+			"file": "Upload a kubeconfig file",
+			"fileMode": "Uploading a file",
+			"formMode": "Manually",
+			"validKubeconfig": "The file is not a valid kubeconfig file",
+			"type": "Cluster Type",
+			"server": "Server",
+			"cloud": "Cloud",
+			"cni": "CNI",
+			"cloudToolTip": "Cloud indicates if the added cluster will have cloud functionality",
+			"authCert": "Authority Certificate",
+			"user": "Username",
+			"clientCert": "Client Certificate",
+			"clientKey": "Client Key",
+			"userToken": "Client Token"
+		},
+		"notifications": {
+			"success": {},
+			"error": {
+				"add": "Error adding the cluster",
+				"clusters": "Error getting clusters",
+				"delete": "Error deleting the cluster",
+				"enabler": "There is at least one enabler deployed in this cluster"
+			}
+		},
+		"progress": {
+			"add": "Adding the cluster...",
+			"get": "Getting clusters...",
+			"delete": "Deleting the cluster..."
+		}
+	},
+	"k8sclustertopology": {
+		"clusterEnablers": "Enablers deployed in the cluster",
+		"newEnabler": "Deploy a new enabler on the node",
+		"noEnablers": "No enablers deployed in the cluster",
+		"notifications": {
+			"success": {
+				"enabler": "Enabler deployed successfully",
+				"enablerHeader": "Deploy enabler on a node"
+			},
+			"error": {
+				"charts": "Error getting charts from the repository",
+				"clusters": "Error getting clusters",
+				"deploy": "Error deploying the enabler",
+				"enablers": "Error getting enablers from the cluster",
+				"exist": "Enabler already exists in the cluster",
+				"noClusters": "No clusters available",
+				"nodes": "Error getting nodes from the cluster"
+			}
+		},
+		"progress": {
+			"cluster": "Getting K8s clusters...",
+			"nodes": "Getting nodes of K8s clusters..."
+		}
+	},
+	"enabler": {
+		"noData": "No enablers available",
+		"new": "Add a new enabler",
+		"delete": "Delete an enabler",
+		"deleteConfirmation": "Do you want to delete the enabler",
+		"deletePv": "Delete the PVCs used by the enabler",
+		"deletePvConfirmation": "Do you want to delete the PVCs and PVs used by the enabler",
+		"deleteEnablerForce": "Force deletion of the enabler",
+		"deleteEnablerForceConfirmation": "Do you want to force the deletion of the enabler",
+		"deleteEnablerForceHint": "The enabler will be removed from Smart Orchestrator but not from the cluster where it is instantiated.",
+		"deleteClusterForce": "Force deletion of the cluster",
+		"deleteClusterForceConfirmation": "Do you want to force the deletion of the cluster",
+		"deleteClusterForceHint": "The cluster will be removed from Smart Orchestrator even if it has no connection or instantiated enablers.",
+		"terminate": "Terminate an enabler",
+		"terminateConfirmation": "Do you want to terminate the enabler",
+		"upgrade": "Upgrade enabler",
+		"table": {
+			"cluster": "K8s Cluster",
+			"status": "Enabler Status",
+			"detailedStatus": "Detailed Status"
+		},
+		"form": {
+			"nameOverride": "Override Name",
+			"fullnameOverride": "Override Full Name",
+			"fullnameOverrideTooltip": "Use the value of the enabler's name field entered to override the names of K8s service components of the enabler (value 'fullnameOverride' from Helm chart)",
+			"repository": "Helm Chart Repository",
+			"versions": "Enabler Versions",
+			"scheduler": "Automatic Cluster Selection",
+			"cluster": "K8s Cluster",
+			"policy": "Location Policy",
+			"policies": {
+				"bestFit": "Best Fit",
+				"worstFit": "Worst Fit",
+				"trafficMost": "Most Traffic"
+			},
+			"globalService": "Multi-cluster Global Service",
+			"globalServiceTooltip": "Deploy Cilium Multi-cluster global services required to enable communication between clusters",
+			"values": "Additional Parameters"
+		},
+		"notifications": {
+			"success": {},
+			"error": {
+				"charts": "Error getting charts from the repository",
+				"clusters": "Error getting clusters",
+				"delete": "Error deleting enabler",
+				"deletePvc": "Error deleting PVCs and PVs of the enabler",
+				"deploy": "Error deploying the enabler",
+				"enablers": "Error getting enablers",
+				"exist": "Enabler already exists in the cluster",
+				"terminate": "Error terminating the enabler"
+			}
+		},
+		"progress": {
+			"add": "Deploying the enabler...",
+			"get": "Getting deployed enablers...",
+			"terminate": "Terminating the enabler...",
+			"delete": "Deleting the enabler...",
+			"clusters": "Getting clusters...",
+			"repositories": "Getting Helm chart repositories...",
+			"enablers": "Getting enablers from the repository...",
+			"versions": "Getting enabler versions..."
+		}
+	},
+	"helmrepository": {
+		"noData": "No repositories available",
+		"new": "Add a new repository",
+		"delete": "Delete a repository",
+		"deleteConfirmation": "Do you want to delete the repository",
+		"typePrivate": "Private Repository",
+		"notifications": {
+			"success": {},
+			"error": {
+				"repositories": "Error getting repositories"
+			}
+		},
+		"progress": {
+			"add": "Adding the repository...",
+			"delete": "Deleting the repository...",
+			"get": "Getting Helm chart repositories...",
+			"update": "Update repository"
+		},
+		"auth": {
+			"username": "Username",
+			"password": "Password"
+
+		}
+	},
+	"groupofcars": {
+		"noData": "No groups available",
+		"new": "Add a new group",
+		"delete": "Delete a group",
+		"deleteConfirmation": "Do you want to delete the group",
+		"getEnablersInGroup": "Get enablers in the group",
+		"donwloadVehiclesInGroup": "Download vehicles in group",
+		"titleGetEnablersInGroup": "Enablers in a group",
+		"typePrivate": "Private Repository",
+		"notifications": {
+			"success": {},
+			"error": {
+				"groups": "Error getting groups"
+			}
+		},
+		"progress": {
+			"add": "Adding the group...",
+			"delete": "Deleting the group...",
+			"get": "Getting vehicle groups...",
+			"update": "Update group"
+		},
+		"auth": {
+			"username": "Username",
+			"password": "Password"
+
+		}
+	},
+	"enablersingroupofcars": {
+		"data":"Enablers in the group",
+		"noData": "No enablers available",
+		"new": "Add a new enabler",
+		"delete": "Delete an enabler from the group",
+		"deleteConfirmation": "Do you want to delete the enabler",
+		"notifications": {
+			"success": {},
+			"error": {
+				"groups": "Error getting enablers"
+			}
+		},
+		"progress": {
+			"add": "Adding the enabler...",
+			"delete": "Deleting the enabler...",
+			"get": "Getting the enablers..."
+		}
+	},
+	"car": {
+		"noData": "No vehicles available",
+		"new": "Add a new vehicle",
+		"delete": "Delete a vehicle",
+		"deleteConfirmation": "Do you want to delete the vehicle",
+		"getVehiclesInGroup": "Get enablers in the vehicle",
+		"titleGetEnablersInVehicles": "Enablers in a vehicle",
+		"typePrivate": "Private Repository",
+		"notifications": {
+			"success": {},
+			"error": {
+				"car": "The vehicle does not exist"
+			}
+		},
+		"progress": {
+			"add": "Adding the vehicle...",
+			"delete": "Deleting the vehicle...",
+			"get": "Getting vehicle groups...",
+			"update": "Update vehicle"
+		},
+		"auth": {
+			"username": "Username",
+			"password": "Password"
+
+		},
+		"group": {
+			"noData": "No groups available"
+		}
+	},
+	"enablersincars": {
+		"data": "Enablers in the vehicle",
+		"noData": "No enablers available",
+		"new": "Add a new enabler",
+		"delete": "Delete an enabler from the vehicle",
+		"deleteConfirmation": "Do you want to delete the enabler",
+		"notifications": {
+			"success": {},
+			"error": {
+				"groups": "Error getting enablers"
+			}
+		},
+		"progress": {
+			"add": "Adding the enabler...",
+			"delete": "Deleting the enabler...",
+			"get": "Getting the enablers..."
+		}
+	},
+	"yes": "Yes",
+	"no": "No",
+	"delete": "Delete",
+	"cancel": "Cancel",
+	"save": "Save",
+	"terminate": "Terminate",
+	"tables": {
+		"name": "Name",
+		"description": "Description",
+		"status": "Status",
+		"cloud": "Cloud",
+		"cni": "CNI",
+		"actions": "Actions",
+		"type": "Type",
+		"timestamp": "Timestamp",
+		"countVehicles": "Vehicle Count",
+		"running": "Running",
+		"error": "Error",
+		"refGroup": "Group",
+		"info": "Information"
+	},
+	"forms": {
+		"required": "is required",
+		"name": "Name",
+		"timeout": "Timeout",
+		"timeoutrequired": " should be between 60 and 1200",
+		"description": "Description",
+		"user": "User",
+		"group": "Group",
+		"validJson": "must be a valid JSON object or remain empty",
+		"validSemver": "Invalid version, must follow SemVer specification (x.y.z or x.y)",
+		"validCNI": "CNI must be cilium or flannel",
+		"validUrl": "Not a valid URL"
+	},
+	"pilot3a": {
+		"uploadCalibration": {
+		  "namespace": "Namespace",
+		  "model": "Model",
+		  "getVersion": "Version",
+		  "addModel": "Add Model",
+		  "uploadCalibration": "Upload Calibration"
+		},
+		"rightPanel": {
+		  "listOfCars": "List of Cars",
+		  "emissionHistogram": "Emission Histogram",
+		  "filter": "Filter",
+		  "allFleet": "All Fleet",
+		  "calibrateSubfleet": "Calibrate Subfleet"
+		},
+		"letfPanel": {
+		  "entireFleet": "Entire Fleet",
+		  "subFleet": "Subfleet"
+		},
+		"filter": {
+		  "histogramFilter": "Histogram Filter",
+		  "filterName": "Filter Name",
+		  "country": "Country",
+		  "rideType": "Ride Type",
+		  "sensorType": "Sensor Type",
+		  "sensorProcessed": "Processed Sensor",
+		  "minDistance": "Min Distance",
+		  "maxDistance": "Max Distance",
+		  "minSpeed": "Min Speed",
+		  "maxSpeed": "Max Speed"
+		}
+	},
+	"plugins": {
+		"install": "Install",
+		"show": "Show",
+		"select": "Select"
+	}
+}
